@@ -1,11 +1,22 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+import aboutModule from "@/store/aboutModule.js";
+import contactModule from "@/store/contactModule.js";
+import projectsModule from "@/store/projectsModule.js";
+import componentsModule from "@/store/componentsModule.js";
+import labModule from "@/store/labModule.js";
+import initModule from "@/store/initModule.js";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {}
+  modules: {
+    aboutModule,
+    contactModule,
+    projectsModule,
+    componentsModule,
+    labModule,
+    initModule
+  }
 });

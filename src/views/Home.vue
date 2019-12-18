@@ -1,18 +1,32 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <article class="home"><h1>hello</h1></article>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import { mapGetters } from "vuex";
 
 export default {
+  components: {},
+  props: {},
   name: "home",
-  components: {
-    HelloWorld
-  }
+  data() {
+    return {};
+  },
+  methods: {},
+  computed: {
+    ...mapGetters({})
+  },
+  mounted() {}
 };
 </script>
+
+<style scoped>
+.home {
+  /* Positioning */
+  /* Box-model */
+  height: 100%;
+  /* Typography */
+  /* Visual */
+  /* Misc */
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <article class="about">about</article>
+  <article class="contact">contact</article>
 </template>
 
 <script>
@@ -8,7 +8,7 @@ import { mapGetters } from "vuex";
 export default {
   components: {},
   props: {},
-  name: "about",
+  name: "contact",
   data() {
     return {};
   },
@@ -21,7 +21,7 @@ export default {
 </script>
 
 <style scoped>
-.about {
+.contact {
   /* Positioning */
   /* Box-model */
   /* Typography */

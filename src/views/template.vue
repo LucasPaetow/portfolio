@@ -1,5 +1,5 @@
 <template>
-  <article class="about">about</article>
+  <article class="about"></article>
 </template>
 
 <script>
