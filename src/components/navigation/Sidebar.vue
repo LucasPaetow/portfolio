@@ -1,7 +1,5 @@
 <template>
-  <section class="navbar-primary">
-    <router-link :to="{ name: '', params: {} }"></router-link>hello
-  </section>
+  <section class="sidebar"></section>
 </template>
 
 <script>
@@ -10,7 +8,7 @@ import { mapGetters } from "vuex";
 export default {
   components: {},
   props: {},
-  name: "navbarPrimary",
+  name: "sidebar",
   data() {
     return {};
   },
@@ -23,7 +21,7 @@ export default {
 </script>
 
 <style scoped>
-.navbar-primary {
+.sidebar {
   /* Positioning */
   /* Box-model */
   /* Typography */
