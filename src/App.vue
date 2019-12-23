@@ -1,22 +1,29 @@
 <template>
   <main id="app">
-    <navbarPrimary />
-    <router-view />
+    <navbar />
+    <section class="app__view">
+      <router-view />
+      <sidebar />
+    </section>
   </main>
 </template>
 
 <script>
-import navbarPrimary from "@/components/navigation/NavbarPrimary.vue";
+import navbar from "@/components/navigation/Navbar.vue";
+import sidebar from "@/components/navigation/Sidebar.vue";
 import { mapGetters } from "vuex";
 export default {
   components: {
-    navbarPrimary
+    navbar,
+    sidebar
   },
   name: "app",
+  methods: {},
   computed: {
     ...mapGetters({})
   },
   mounted() {
+    //call the init module
     this.$store.dispatch("initModule/INIT_this");
   }
 };
@@ -39,8 +46,8 @@ export default {
   --base-10x: calc(var(--base-9x) * var(--multiplier));
   --base-fr2: calc((var(--base-1x) / var(--multiplier)));
   --base-fr3: calc((var(--base-fr2) / var(--multiplier)));
-  --base-fr3: calc((var(--base-fr2) / var(--multiplier)));
-  --base-fr4: calc((var(--base-fr2) / var(--multiplier)));
+  --base-fr4: calc((var(--base-fr3) / var(--multiplier)));
+  --base-fr5: calc((var(--base-fr4) / var(--multiplier)));
 
   //sidebar padding
   --sidebar-width: 15rem;
@@ -62,12 +69,13 @@ export default {
   /* Misc */
 }
 
-body,
 html,
-#app {
+body,
+#app,
+.app__view {
   /* Positioning */
   /* Box-model */
-  min-height: 100%;
+  height: 100%;
   /* Typography */
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -86,7 +94,7 @@ select {
   /* Positioning */
   /* Box-model */
   /* Typography */
-  font-size: var(--1base);
+  font-size: var(--base-1x);
   line-height: 150%;
   /* Visual */
   color: $oc-gray-8;

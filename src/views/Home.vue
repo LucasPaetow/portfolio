@@ -1,5 +1,7 @@
 <template>
-  <article class="home"><h1>hello</h1></article>
+  <article class="home" v-on:scroll="console.log('scrolling')">
+    <h1>hello</h1>
+  </article>
 </template>
 
 <script>
@@ -12,7 +14,11 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    scrollListener(event) {
+      console.log(event);
+    }
+  },
   computed: {
     ...mapGetters({})
   },
@@ -27,6 +33,7 @@ export default {
   height: 100%;
   /* Typography */
   /* Visual */
+  background-color: hsla(0, 0%, 0%, 0.05);
   /* Misc */
 }
 </style>
