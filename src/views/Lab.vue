@@ -22,7 +22,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .lab {
   /* Positioning */
   /* Box-model */

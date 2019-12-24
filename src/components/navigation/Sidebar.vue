@@ -1,5 +1,5 @@
 <template>
-  <section class="sidebar"></section>
+  <aside class="sidebar"></aside>
 </template>
 
 <script>
@@ -20,12 +20,15 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .sidebar {
   /* Positioning */
   /* Box-model */
+  width: 10rem;
+  height: 100%;
   /* Typography */
   /* Visual */
+  background-color: lightblue;
   /* Misc */
 }
 </style>
