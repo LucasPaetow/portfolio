@@ -1,9 +1,11 @@
 <template>
   <main id="app">
     <navbar />
-    <section class="app__view">
-      <router-view />
-      <sidebar />
+    <section class="app__main">
+      <router-view class="app__view" />
+      <smoothRepaint>
+        <sidebar class="app__sidebar" v-if="isSidebarOpen" />
+      </smoothRepaint>
     </section>
   </main>
 </template>
@@ -11,16 +13,26 @@
 <script>
 import navbar from "@/components/navigation/Navbar.vue";
 import sidebar from "@/components/navigation/Sidebar.vue";
+import smoothRepaint from "@/components/Wrapper/WrapperRepaint.vue";
 import { mapGetters } from "vuex";
 export default {
   components: {
     navbar,
-    sidebar
+    sidebar,
+    smoothRepaint
   },
   name: "app",
   methods: {},
   computed: {
-    ...mapGetters({})
+    ...mapGetters({
+      getSidebarState: "sidebarModule/getSidebarState"
+    }),
+    isSidebarOpen() {
+      let currentRoute = this.$route.name !== "home";
+      let sidebarState = this.getSidebarState;
+      //dont show sidebar on the home screen or when its toggled off
+      return currentRoute && sidebarState ? true : false;
+    }
   },
   mounted() {
     //call the init module
@@ -72,7 +84,7 @@ export default {
 html,
 body,
 #app,
-.app__view {
+.app__main {
   /* Positioning */
   /* Box-model */
   height: 100%;
@@ -118,5 +130,57 @@ ul {
   /* Visual */
   /* Misc */
   list-style: none;
+}
+
+/*--------------------- app.vue styles----------------------*/
+.app__main {
+  /* Positioning */
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  /* Box-model */
+  /* Typography */
+  /* Visual */
+  /* Misc */
+}
+
+.app__view {
+  /* Positioning */
+  grid-column: 1/3;
+  /* Box-model */
+  /* Typography */
+  /* Visual */
+  /* Misc */
+}
+
+.app__sidebar {
+  /* Positioning */
+  display: none;
+  /* Box-model */
+  /* Typography */
+  /* Visual */
+  /* Misc */
+}
+
+@media screen and (min-width: 30rem) {
+  .app__view {
+    /* Positioning */
+    grid-column: 2/3;
+    grid-row: 1/2;
+    /* Box-model */
+    /* Typography */
+    /* Visual */
+    /* Misc */
+  }
+
+  .app__sidebar {
+    /* Positioning */
+    display: grid;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    /* Box-model */
+    /* Typography */
+    /* Visual */
+    /* Misc */
+  }
 }
 </style>

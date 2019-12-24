@@ -19,7 +19,7 @@
         class="navbar__link navbar__link--unstyled navbar__link--button"
         :to="{ name: 'contact', params: {} }"
       >
-        <button class="navbar__button">
+        <button class="navbar__button" @click="toggleSidebar">
           contact
         </button>
       </router-link>
@@ -62,6 +62,9 @@ export default {
     };
   },
   methods: {
+    toggleSidebar() {
+      this.$store.dispatch("sidebarModule/SIDEBAR_toggle");
+    },
     scrollEvent() {
       //check for inital scroll and change data
       window.scrollY === 0
@@ -110,7 +113,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .navbar {
   /* Positioning */
   position: sticky;

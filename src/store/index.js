@@ -7,6 +7,7 @@ import projectsModule from "@/store/projectsModule.js";
 import componentsModule from "@/store/componentsModule.js";
 import labModule from "@/store/labModule.js";
 import utilityModule from "@/store/utilityModule.js";
+import sidebarModule from "@/store/sidebarModule.js";
 import initModule from "@/store/initModule.js";
 
 Vue.use(Vuex);
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     componentsModule,
     labModule,
     utilityModule,
+    sidebarModule,
     initModule
   }
 });
