@@ -3,11 +3,9 @@
         @enter="enter"
         @after-enter="afterEnter"-->
   <transition
-    mode="out-in"
     @before-leave="beforeLeave"
     @leave="leave"
     @after-leave="afterLeave"
-    :css="false"
     v-resize="resizeEvent"
   >
     <slot />
@@ -51,52 +49,23 @@ export default {
     beforeLeave(el) {
       this.initalValue = this.calculateValues(el);
     },
-    /*async leave(el, done) {
-      let animatePromise = () =>
-        new Promise(resolve => {
-          this.animate({
-            duration: 1000,
-            timing(timeFraction) {
-              return timeFraction;
-            },
-            draw(progress) {
-              el.style.width = 100 - progress * 100 + "%";
-            },
-            callback() {
-              console.log("finished");
-              resolve();
-            }
-          });
-        });
-
-      await animatePromise();
-      await done();
-  },*/
-    async leave(el, done) {
-      let animatePromise = () =>
-        new Promise(resolve => {
-          this.weirdFunction(el, () => {
-            resolve();
-          });
-        });
-
-      await animatePromise();
-      await done();
-    },
     afterLeave(el) {
       console.log("done", el);
     },
-    weirdFunction(el, callback) {
-      this.animate({
-        duration: 1000,
+    async leave(el, done) {
+      let previousValues = this.calculateValues(el);
+
+      await this.animate({
+        duration: 200,
         timing(timeFraction) {
           return timeFraction;
         },
         draw(progress) {
-          el.style.width = 100 - progress * 100 + "%";
-          if (progress === 1) callback();
+          el.style.width =
+            previousValues.width - previousValues.width * progress + "px";
         }
       });
+      await done();
     },
     /*beforeEnter(el) {
       console.log(el);
@@ -108,27 +77,20 @@ export default {
     afterEnter(el) {
       console.log(el);
   },*/
-    animate({ timing, draw, duration /*, callback*/ }) {
+    animate({ timing, draw, duration }) {
       let start = performance.now();
-
-      requestAnimationFrame(function animate(time) {
-        // timeFraction goes from 0 to 1
-        let timeFraction = (time - start) / duration;
-        if (timeFraction > 1) timeFraction = 1;
-
-        // calculate the current animation state
-        let progress = timing(timeFraction);
-
-        // draw it
-        draw(progress);
-
-        if (timeFraction < 1) {
-          //loop the animation
-          requestAnimationFrame(animate);
-        } /*else {
-          //or finish with the callback
-          callback();
-      }*/
+      return new Promise(resolve => {
+        requestAnimationFrame(function animate(time) {
+          // timeFraction goes from 0 to 1
+          let timeFraction = (time - start) / duration;
+          if (timeFraction > 1) timeFraction = 1;
+          // calculate the current animation state
+          let progress = timing(timeFraction);
+          draw(progress); // draw it
+          timeFraction < 1
+            ? requestAnimationFrame(animate)
+            : resolve("resolved animation");
+        });
       });
     },
     calculateValues(element) {
