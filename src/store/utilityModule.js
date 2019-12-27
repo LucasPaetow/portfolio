@@ -1,29 +1,36 @@
 export default {
-  namespaced: true,
-  // -----------------------------------------------------------------
-  state: {
-    tabArray: ["projects", "lab", "components", "about"]
-  },
-  // -----------------------------------------------------------------
-  getters: {
-    getSurroundingTabs: state => current => {
-      let currentIndex = state.tabArray.findIndex(tab => tab === current);
+	namespaced: true,
+	// -----------------------------------------------------------------
+	state: {
+		widthStatus: null
+	},
+	// -----------------------------------------------------------------
+	getters: {
+		getWidthStatus: state => {
+			return state.widthStatus;
+		}
+	},
+	// -----------------------------------------------------------------
+	mutations: {
+		WIDTH_setStatus(state, status) {
+			state.widthStatus = status;
+		}
+	},
+	// -----------------------------------------------------------------
+	actions: {
+		WIDTH_init: ({ commit }) => {
+			let width = window.innerWidth;
 
-      return {
-        //inverted due to the inverted nature of swipe gestures
-        left:
-          state.tabArray[
-            currentIndex === state.tabArray.length - 1
-              ? currentIndex
-              : currentIndex + 1
-          ],
-        right:
-          state.tabArray[currentIndex === 0 ? currentIndex : currentIndex - 1]
-      };
-    }
-  },
-  // -----------------------------------------------------------------
-  mutations: {},
-  // -----------------------------------------------------------------
-  actions: {}
+			if (width < 500) {
+				commit("WIDTH_setStatus", "mobile");
+			} else if (width < 900) {
+				commit("WIDTH_setStatus", "tablet");
+			} else {
+				commit("WIDTH_setStatus", "desktop");
+			}
+		},
+		WIDTH_setStatus: ({ commit }, boolean) => {
+			commit("WIDTH_setStatus", boolean);
+		}
+	}
 };
