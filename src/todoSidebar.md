@@ -1,8 +1,5 @@
 # sidebar
-
-- Wrap a RAF Animation wrapper around it
-
-- create a toggle on 2-3 level underneath the logo
+- create a toggle on 2 + 3 level underneath the logo
 
 ### sidebar - mobile
 
