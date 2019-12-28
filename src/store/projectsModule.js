@@ -1,40 +1,25 @@
 export default {
-  namespaced: true,
-  // -----------------------------------------------------------------
-  state: {
-    sidebarOpen: false
-  },
-  // -----------------------------------------------------------------
-  getters: {
-    getSidebarState: state => {
-      return state.sidebarOpen;
-    }
-  },
-  // -----------------------------------------------------------------
-  mutations: {
-    SIDEBAR_toggle(state, boolean) {
-      //set the current state to that of the index
-      state.sidebarOpen = boolean;
-    }
-  },
-  // -----------------------------------------------------------------
-  actions: {
-    SIDEBAR_init: ({ commit }) => {
-      //check if this is viewed on tablet / mobile
-      let width = window.innerWidth;
-
-      if (width < 800) {
-        // if so, hide the navbar
-        commit("SIDEBAR_toggle", false);
-        return "not enough width for the sidebar";
-      } else {
-        // if not, show the navbar
-        commit("SIDEBAR_toggle", true);
-        return "sidebar is fine";
-      }
-    },
-    SIDEBAR_toggle: ({ commit }, boolean) => {
-      commit("SIDEBAR_toggle", boolean);
-    }
-  }
+	namespaced: true,
+	// -----------------------------------------------------------------
+	state: {
+		project1: {
+			name: "e-commerce",
+			linkTarget: "project",
+			params: "e-commerce",
+			description:
+				"An even smaller paragraph explaining atoms. An even smaller paragraph explaining atoms. An even smaller paragraph explaining atoms",
+			image:
+				"https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjI0MX0&auto=format&fit=crop&w=1350&q=80"
+		}
+	},
+	// -----------------------------------------------------------------
+	getters: {
+		getProjects: state => {
+			return Object.values(state);
+		}
+	},
+	// -----------------------------------------------------------------
+	mutations: {},
+	// -----------------------------------------------------------------
+	actions: {}
 };
