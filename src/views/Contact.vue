@@ -1,5 +1,8 @@
 <template>
-	<article class="contact">contact</article>
+	<article class="contact">
+		<router-link :to="{name: 'contactSidebar' }">contact</router-link>
+		<router-view></router-view>
+	</article>
 </template>
 
 <script>

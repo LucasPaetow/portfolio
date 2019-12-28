@@ -1,5 +1,4 @@
 ## base
 
--   dark overlay, which can be clicked to go back - option for non dark overlay
-
-*   slot for the content - has to be positioned
+-   Has to work for the mobile link preview as well as the mobile sidebar
+-   Maybe I want to have modals working in general for alerts and or toasts, so not for mobile only
