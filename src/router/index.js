@@ -55,9 +55,22 @@ const routes = [
 			import(/* webpackChunkName: "about" */ "../views/Projects.vue"),
 		children: [
 			{
+				path: "/projects/overview",
+				name: "ModalSidebar",
+				component: () => import("@/components/modal/ModalSidebar.vue")
+			},
+			{
 				path: "/projects/:project",
 				name: "project",
-				component: () => import("@/components/modal/ModalSidebar.vue")
+				component: () => import("@/components/modal/ModalSidebar.vue"),
+				children: [
+					{
+						path: "/projects/:project/overview",
+						name: "ModalOverviewSidebar",
+						component: () =>
+							import("@/components/modal/ModalSidebar.vue")
+					}
+				]
 			}
 		]
 	}

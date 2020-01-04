@@ -1,31 +1,50 @@
 <template>
 	<section
-		class="navbar"
-		v-scroll="scrollEvent"
 		id="navbar"
+		v-scroll="scrollEvent"
+		class="navbar"
 		:class="isScrolled ? 'navbar--shadow' : ''"
 	>
-		<div class="navbar__top" id="navbar__top">
+		<div id="navbar__top" class="navbar__top">
 			<router-link
 				class="navbar__link navbar__link--unstyled navbar__link--logo"
 				:to="{ name: 'home', params: {} }"
 			>
 				<div class="navbar__logo">
-					<h3 class="logo__text">LP</h3>
+					<h3 v-if="isMobile" class="logo__text">LP</h3>
+					<h3 v-else class="logo__text">Lucas Paetow</h3>
 				</div>
 			</router-link>
 			<router-link
 				class="navbar__link navbar__link--unstyled navbar__link--button"
 				:to="{ name: 'contact', params: {} }"
 			>
-				<button class="navbar__button" @click="toggleSidebar">contact</button>
+				<baseButton
+					class="navbar__button"
+					label="Contact"
+					@click="toggleSidebar"
+				></baseButton>
 			</router-link>
 		</div>
 		<div class="navbar__bottom">
-			<router-link class="navbar__link" :to="{ name: 'projects', params: {} }">Projects</router-link>
-			<router-link class="navbar__link" :to="{ name: 'lab', params: {} }">Lab</router-link>
-			<router-link class="navbar__link" :to="{ name: 'components', params: {} }">Components</router-link>
-			<router-link class="navbar__link" :to="{ name: 'about', params: {} }">About</router-link>
+			<router-link
+				class="navbar__link"
+				:to="{ name: 'projects', params: {} }"
+				>Projects</router-link
+			>
+			<router-link class="navbar__link" :to="{ name: 'lab', params: {} }"
+				>Lab</router-link
+			>
+			<router-link
+				class="navbar__link"
+				:to="{ name: 'components', params: {} }"
+				>Components</router-link
+			>
+			<router-link
+				class="navbar__link"
+				:to="{ name: 'about', params: {} }"
+				>About</router-link
+			>
 		</div>
 	</section>
 </template>
@@ -33,14 +52,17 @@
 <script>
 import { mapGetters } from "vuex";
 import { scroll } from "@/utility/customDirectives/scroll.js";
+import baseButton from "@/components/baseComponents/BaseButton.vue";
 
 export default {
-	components: {},
-	props: {},
+	name: "Navbar",
+	components: {
+		baseButton
+	},
 	directives: {
 		scroll
 	},
-	name: "navbar",
+	props: {},
 	data() {
 		return {
 			isScrolled: false,
@@ -144,7 +166,7 @@ export default {
 	.navbar {
 		/* Positioning */
 		grid-template-rows: 1fr;
-		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1.61fr 1fr;
 		/* Box-model */
 		/* Typography */
 		/* Visual */
@@ -179,8 +201,9 @@ export default {
 		/* Positioning */
 		grid-column: 1/4;
 		grid-row: 1/2;
-		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1.61fr 1fr;
 		/* Box-model */
+		padding: var(--base-fr3) var(--base-2x);
 		/* Typography */
 		/* Visual */
 		/* Misc */
@@ -191,13 +214,22 @@ export default {
 		grid-column: 2/3;
 		grid-row: 1/2;
 		grid-auto-flow: column;
-		justify-content: space-around;
 		align-content: center;
+		justify-content: left;
 		/* Box-model */
+		width: 100%;
 		/* Typography */
 		/* Visual */
 		/* Misc */
 	}
+}
+
+.navbar__link {
+	/* Positioning */
+	/* Box-model */
+	/* Typography */
+	/* Visual */
+	/* Misc */
 }
 
 .navbar__link--logo {
@@ -211,6 +243,7 @@ export default {
 .navbar__link--button {
 	/* Positioning */
 	grid-column: 3/4;
+	justify-self: end;
 	/* Box-model */
 	/* Typography */
 	/* Visual */
@@ -224,7 +257,6 @@ export default {
 	padding: 0.5rem 1rem;
 	/* Typography */
 	/* Visual */
-	border: 1px solid grey;
 	/* Misc */
 }
 
@@ -232,11 +264,28 @@ export default {
 	/* Positioning */
 	grid-column: 3/4;
 	/* Box-model */
-	padding: 0.5rem 1rem;
-	width: 100%;
 	/* Typography */
 	/* Visual */
-	border: 1px solid grey;
 	/* Misc */
+}
+
+@media screen and (min-width: 30rem) {
+	.navbar__link {
+		/* Positioning */
+		/* Box-model */
+		margin-right: var(--base-4x);
+		/* Typography */
+		/* Visual */
+		/* Misc */
+	}
+
+	.navbar__logo {
+		/* Positioning */
+		/* Box-model */
+		margin-left: var(--base-4x);
+		/* Typography */
+		/* Visual */
+		/* Misc */
+	}
 }
 </style>
